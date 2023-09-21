@@ -39,15 +39,13 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
-List<Person> allUser = [];
+  List<Person> allUser = [];
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
-
-
-
 
   addPerson() {
     Person newPerson = Person(
@@ -60,7 +58,9 @@ List<Person> allUser = [];
       print(newPerson);
     }
 
-    box.add(Person(nameController.text, int.parse(ageController.text),
+    box.add(Person(
+        nameController.text,
+        int.parse(ageController.text),
         ContactDetail(
             emailController.text, double.parse(mobileNumberController.text))));
     if (kDebugMode) {
@@ -78,7 +78,6 @@ List<Person> allUser = [];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -107,26 +106,27 @@ List<Person> allUser = [];
                       );
                     } else {
                       return ListView.builder(
-                        // scrollDirection: Axis.horizontal,
+                          // scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount: allUser.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Card(
-                              elevation: 5,
-                              child: Column(
-                                children: [
-                                  Text(allUser[index].name),
-                                  Text(allUser[index].age.toString()),
-                                  Text(allUser[index].contactDetail.email),
-                                  Text(allUser[index].contactDetail.mobileNumber.toString()),
-                                ],
-                              )
-                            );
+                                elevation: 5,
+                                child: Column(
+                                  children: [
+                                    Text(allUser[index].name),
+                                    Text(allUser[index].age.toString()),
+                                    Text(allUser[index].contactDetail.email),
+                                    Text(allUser[index]
+                                        .contactDetail
+                                        .mobileNumber
+                                        .toString()),
+                                  ],
+                                ));
                           });
                     }
                   }),
             )
-
           ],
         ),
       ),
@@ -144,8 +144,10 @@ List<Person> allUser = [];
     );
   }
 
-  TextFormField customTextField(String text,
-      TextEditingController controller,) {
+  TextFormField customTextField(
+    String text,
+    TextEditingController controller,
+  ) {
     return TextFormField(
       controller: controller,
       validator: (value) {
@@ -160,7 +162,8 @@ List<Person> allUser = [];
       },
       decoration: InputDecoration(
         hintText: text,
-        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
