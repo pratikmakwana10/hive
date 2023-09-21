@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     } else {
                       return ListView.builder(
-                          // scrollDirection: Axis.horizontal,
+                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemCount: allUser.length,
                           itemBuilder: (BuildContext context, int index) {
