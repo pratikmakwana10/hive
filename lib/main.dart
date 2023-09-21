@@ -1,5 +1,5 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import 'model/person_model.dart';
@@ -56,15 +56,21 @@ List<Person> allUser = [];
       ContactDetail(
           emailController.text, double.parse(mobileNumberController.text)),
     );
-    print(newPerson);
+    if (kDebugMode) {
+      print(newPerson);
+    }
 
     box.add(Person(nameController.text, int.parse(ageController.text),
         ContactDetail(
             emailController.text, double.parse(mobileNumberController.text))));
-    print(box.getAt(0));
+    if (kDebugMode) {
+      print(box.getAt(0));
+    }
     for (var element in box.values) {
       allUser.add(element);
-      print((element));
+      if (kDebugMode) {
+        print((element));
+      }
     }
 
     //  box.put(newPerson);
@@ -90,37 +96,35 @@ List<Person> allUser = [];
             buildSizeBox(10),
             customTextField("mobileNumber", mobileNumberController),
             buildSizeBox(10),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ValueListenableBuilder(
-                    valueListenable: box.listenable(),
-                    builder: (context, Box box, widget) {
-                      if (box.isEmpty) {
-                        return const Center(
-                          child: Text('Empty'),
-                        );
-                      } else {
-                        return ListView.builder(
-                          // scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemCount: allUser.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                elevation: 5,
-                                child: Column(
-                                  children: [
-                                    Text(allUser[index].name),
-                                    Text(allUser[index].age.toString()),
-                                    Text(allUser[index].contactDetail.email),
-                                    Text(allUser[index].contactDetail.mobileNumber.toString()),
-                                  ],
-                                )
-                              );
-                            });
-                      }
-                    }),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ValueListenableBuilder(
+                  valueListenable: box.listenable(),
+                  builder: (context, Box box, widget) {
+                    if (box.isEmpty) {
+                      return const Center(
+                        child: Text('Empty'),
+                      );
+                    } else {
+                      return ListView.builder(
+                        // scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: allUser.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Card(
+                              elevation: 5,
+                              child: Column(
+                                children: [
+                                  Text(allUser[index].name),
+                                  Text(allUser[index].age.toString()),
+                                  Text(allUser[index].contactDetail.email),
+                                  Text(allUser[index].contactDetail.mobileNumber.toString()),
+                                ],
+                              )
+                            );
+                          });
+                    }
+                  }),
             )
 
           ],
@@ -156,17 +160,17 @@ List<Person> allUser = [];
       },
       decoration: InputDecoration(
         hintText: text,
-        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-        border: OutlineInputBorder(
+        contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+        border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey.shade700, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey.shade400, width: 1.5),
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
         ),
       ),
     );
